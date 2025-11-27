@@ -8,10 +8,14 @@ public class Obstacles : MonoBehaviour
     float timeBetweenReverse = 0f;
     int lastRand;
 
+    public GameObject player;
+    public GameObject obstacle;
+    public GameObject enemy;
+    public GameObject coin;
+
     Rigidbody2D rb;
     void Start()
     {
-        // Generar un número aleatorio entre 1 y 2 para decidir la dirección inicial
         lastRand = generateRand();
         rb = GetComponent<Rigidbody2D>();
         
@@ -28,7 +32,6 @@ public class Obstacles : MonoBehaviour
 
     void Update()
     {
-        
     }
     void Reverse()
     {

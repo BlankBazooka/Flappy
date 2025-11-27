@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class BirdPhysics : MonoBehaviour
@@ -22,13 +23,13 @@ public class BirdPhysics : MonoBehaviour
     [SerializeField] float coinSoundVolume = 1f;
 
     // Objetos necesarios
-    AudioSource audioSource;
+    AudioSource CoinAudio;
     Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>();
+        CoinAudio = GetComponent<AudioSource>();
         MoveRight();
     }
 
@@ -49,9 +50,10 @@ public class BirdPhysics : MonoBehaviour
         Timer.text = GameManager.instance.timer.ToString("F1");
         ActualizarVidas();
 
-        if (GameManager.instance.obstaculos > 6)
+        if (GameManager.instance.obstaculos > 6 && SceneManager.GetActiveScene().name == "Scene1")
         {
             SceneManager.LoadScene("Scene2");
+            GameManager.instance.ResetScore();
         }
     }
 
@@ -62,12 +64,13 @@ public class BirdPhysics : MonoBehaviour
 
     public void PlaySound(AudioClip clip, float volume = 1f)
     {
-        audioSource.PlayOneShot(clip, volume);
+        CoinAudio.PlayOneShot(clip, volume);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.instance.ResetScore();
     }
 
     public void ActualizarVidas()

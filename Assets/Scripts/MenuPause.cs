@@ -19,6 +19,7 @@ public class MenuPause : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.instance.ResetScore();
         UnPause();
     }
     public void Quit()
