@@ -10,6 +10,7 @@ TagManager:
   - player
   - spawn
   - Spawner
+  - ground
   layers:
   - Default
   - TransparentFX

@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class BirdPhysics : MonoBehaviour
@@ -36,7 +33,7 @@ public class BirdPhysics : MonoBehaviour
     void Update()
     {
         // En mi caso el salto es con la barra espaciadora
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             rb.AddForce(Vector2.up * force);
         }
@@ -49,6 +46,8 @@ public class BirdPhysics : MonoBehaviour
         GameManager.instance.timer += Time.deltaTime;
         Timer.text = GameManager.instance.timer.ToString("F1");
         ActualizarVidas();
+        ActualizarObs();
+        ActualizarScore();
 
         if (GameManager.instance.obstaculos > 6 && SceneManager.GetActiveScene().name == "Scene1")
         {
@@ -76,6 +75,14 @@ public class BirdPhysics : MonoBehaviour
     public void ActualizarVidas()
     {
         Vidas.text = "Health: " + GameManager.instance.vidas.ToString();
+    }    
+    public void ActualizarObs()
+    {
+        ObstaculosText.text = "Walls: " + GameManager.instance.obstaculosReales.ToString();
+    }
+    public void ActualizarScore()
+    {
+        Score.text = "Score: " + GameManager.instance.score.ToString();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -109,12 +116,18 @@ public class BirdPhysics : MonoBehaviour
         if (collision.CompareTag("wall") && distanceX < 2f)
         {
             GameManager.instance.SumarObstaculos();
-            ObstaculosText.text = "Walls: " + GameManager.instance.obstaculos.ToString();
+            GameManager.instance.AnctualizarObs();
+            ObstaculosText.text = "Walls: " + GameManager.instance.obstaculosReales.ToString();
         }
 
         if (collision.CompareTag("Spawner"))
         {
-            GameManager.instance.canSpawn = true;
+            if (!GameManager.instance.canSpawn)
+            {
+                GameManager.instance.canSpawn = true;
+            }
+            if (SceneManager.GetActiveScene().name == "Scene2")
+            GameManager.instance.GenerateGround();
         }
     }
 }

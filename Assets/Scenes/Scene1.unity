@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 428070724}
   m_Layer: 8
   m_Name: ground
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1692,6 +1692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907484d210c7eee489651ac2e7580ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaculosReales: 0
   obstaculos: 0
   timer: 0
   vidas: 3
@@ -1703,6 +1704,8 @@ MonoBehaviour:
   spawnRate: 2
   spawnRange: 2.5
   canSpawn: 0
+  groundPrefab: {fileID: 3096616415634433299, guid: ce3f6b29a6dd9e64788023f94e239940, type: 3}
+  groundSpawnPoint: {fileID: 0}
 --- !u!4 &623366857
 Transform:
   m_ObjectHideFlags: 0
@@ -3169,11 +3172,11 @@ PrefabInstance:
       objectReference: {fileID: 379982264}
     - target: {fileID: 2515677465096769839, guid: f7dbe8034b3fdc4408ecf2cb3e2bd8e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.11
+      value: -7.52
       objectReference: {fileID: 0}
     - target: {fileID: 2515677465096769839, guid: f7dbe8034b3fdc4408ecf2cb3e2bd8e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2515677465096769839, guid: f7dbe8034b3fdc4408ecf2cb3e2bd8e6, type: 3}
       propertyPath: m_LocalPosition.z

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // Variables de juego
+    public int obstaculosReales = 0;
     public int obstaculos = 0;
     public float timer = 0f;
     public int vidas;
@@ -20,10 +21,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private bool SpawnArriba;
     public bool canSpawn = false;
+    public GameObject groundPrefab;
+    public Transform groundSpawnPoint;
 
     void Start()
     {
-        obstaculos = 0;
+        obstaculosReales = 0;
         timer = 0f;
         vidas = 3;
         score = 0;
@@ -33,13 +36,17 @@ public class GameManager : MonoBehaviour
         if (spawner == null)
         {
             spawner = GameObject.FindGameObjectWithTag("spawn");
+        }        
+        if (groundSpawnPoint == null)
+        {
+            groundSpawnPoint = GameObject.FindGameObjectWithTag("ground").transform;
         }
         if (vidas <= 0)
         {
             SceneManager.LoadScene("Scene1");
             vidas = 3;
             timer = 0f;
-            obstaculos = 0;
+            obstaculosReales = 0;
             score = 0;
         }
         if (obstaculos >= 8)
@@ -56,6 +63,10 @@ public class GameManager : MonoBehaviour
     public void SumarObstaculos()
     {
         obstaculos++;
+    }
+    public void AnctualizarObs()
+    {
+        obstaculosReales++;
     }
     void SpawnObjects()
     {
@@ -81,10 +92,13 @@ public class GameManager : MonoBehaviour
             Instantiate(enemyPrefab, new Vector3(spawner.transform.position.x + 17f, yPos - 1f, 0), Quaternion.identity);
         }
     }
+    public void GenerateGround()
+    {
+        groundSpawnPoint = Instantiate(groundPrefab, new Vector3(groundSpawnPoint.position.x + 64f, -5f, 0), Quaternion.identity).transform;
+    }
     public void ResetScore()
     {
         obstaculos = 0;
-        score = 0;
     }
     void Awake()
     {
