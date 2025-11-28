@@ -111,6 +111,11 @@ public class BirdPhysics : MonoBehaviour
             GameManager.instance.SumarObstaculos();
             ObstaculosText.text = "Walls: " + GameManager.instance.obstaculos.ToString();
         }
+
+        if (collision.CompareTag("Spawner"))
+        {
+            GameManager.instance.canSpawn = true;
+        }
     }
 }
 

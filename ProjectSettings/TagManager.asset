@@ -8,6 +8,8 @@ TagManager:
   - enemy
   - wall
   - player
+  - spawn
+  - Spawner
   layers:
   - Default
   - TransparentFX
